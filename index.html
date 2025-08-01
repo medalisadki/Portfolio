@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohamed-Ali Sadiki | Civil Engineering Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0d47a1',
+                        secondary: '#1565c0',
+                        accent: '#2196f3',
+                        dark: '#0a2e5e',
+                        light: '#e3f2fd'
+                    },
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #2196f3;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .skill-badge {
+            transition: all 0.3s ease;
+        }
+        .skill-badge:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .experience-card {
+            transition: all 0.3s ease;
+            border-left: 3px solid #0d47a1;
+        }
+        .experience-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+        }
+        .section-title {
+            position: relative;
+            display: inline-block;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50%;
+            height: 3px;
+            background-color: #2196f3;
+        }
+
+        /* Dark mode styles */
+        .dark {
+            --tw-bg-opacity: 1;
+            background-color: rgba(17, 24, 39, var(--tw-bg-opacity));
+            color: rgba(229, 231, 235, var(--tw-text-opacity));
+        }
+        .dark .bg-white {
+            background-color: rgba(31, 41, 55, var(--tw-bg-opacity));
+        }
+        .dark .bg-gray-50 {
+            background-color: rgba(31, 41, 55, var(--tw-bg-opacity));
+        }
+        .dark .text-gray-800 {
+            color: rgba(229, 231, 235, var(--tw-text-opacity));
+        }
+        .dark .text-gray-600 {
+            color: rgba(156, 163, 175, var(--tw-text-opacity));
+        }
+        .dark .bg-gray-200 {
+            background-color: rgba(55, 65, 81, var(--tw-bg-opacity));
+        }
+        .dark .shadow-md {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.12);
+        }
+        .dark .experience-card {
+            border-left-color: #1565c0;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-inter">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md fixed w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="#home" class="text-primary text-xl font-bold">Mohamed-Ali SADIKI</a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="nav-link text-gray-600 hover:text-primary">Home</a>
+                    <a href="#experience" class="nav-link text-gray-600 hover:text-primary">Experience</a>
+                    <a href="#skills" class="nav-link text-gray-600 hover:text-primary">Skills</a>
+                    <a href="#education" class="nav-link text-gray-600 hover:text-primary">Education</a>
+                    <a href="#contact" class="nav-link text-gray-600 hover:text-primary">Contact</a>
+                    <button id="darkModeToggle" class="text-gray-600 hover:text-primary focus:outline-none">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-gray-600 hover:text-primary">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#home" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-primary hover:bg-gray-50">Home</a>
+                <a href="#experience" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-primary hover:bg-gray-50">Experience</a>
+                <a href="#skills" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-primary hover:bg-gray-50">Skills</a>
+                <a href="#education" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-primary hover:bg-gray-50">Education</a>
+                <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-primary hover:bg-gray-50">Contact</a>
+                <button id="mobileDarkModeToggle" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-primary hover:bg-gray-50 focus:outline-none">
+                    <i class="fas fa-moon mr-2"></i>Dark Mode
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="pt-20 pb-16 md:pt-32 md:pb-24 bg-gradient-to-br from-primary to-dark text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-4">Mohamed-Ali SADIKI</h1>
+                    <h2 class="text-2xl md:text-2xl font-semibold mb-10 text-blue-300">Civil Engineer | Project Control | Marine & Road Infrastructure</h2>
+                    <p class="text-lg mb-8 max-w-2xl">
+                        Passionate Civil Engineer specialized in marine and road infrastructure, with hands-on experience in project control, material quality management, and structural stability analysis. Proficient in automating project reporting, optimizing workflows, and delivering technical solutions using digital tools (Excel, Power BI, Power Query, Python).
+                        Eager to contribute to impactful engineering projects and continuously grow in challenging environments.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#contact" class="bg-accent hover:bg-blue-400 text-white px-6 py-3 rounded-lg font-medium transition duration-300">Contact Me</a>
+                       <div x-data="{ open: false }" class="relative inline-block text-left">
+    <!-- Main Button -->
+    <button @click="open = !open" class="bg-white hover:bg-gray-100 text-primary px-6 py-3 rounded-lg font-medium transition duration-200">
+        Download CV 
+    </button>
+
+    <!-- Dropdown Menu -->
+    <div x-show="open" @click.away="open = false" x-transition
+         class="absolute mt-2 w-44 bg-white border border-gray-300 rounded-md shadow-lg z-20 overflow-hidden">
+        <a href="https://drive.google.com/file/d/1tMlTv7-ROEwOTKPlvp4OTyL55dgWEFDA/view?usp=drive_link"
+           target="_blank"
+           class="block w-full px-4 py-2 text-left text-sm text-gray-400 hover:bg-accent hover:text-white transition-colors duration-150">
+            📄 English
+        </a>
+        <a href="https://drive.google.com/file/d/15nH1f1lABdgS1K4PHxPcECM2D6L3XGkn/view?usp=drive_link"
+           target="_blank"
+           class="block w-full px-4 py-2 text-left text-sm text-gray-400 hover:bg-accent hover:text-white transition-colors duration-150">
+            📄 French
+        </a>
+    </div>
+</div>
+
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <div class="relative -mt-6">
+                       <div class="bg-gray-200 border-2 border-dashed rounded-xl w-64 h-64 md:w-80 md:h-80 flex items-center justify-center overflow-hidden">
+                    <img src="profile.jpg" alt="Profile Photo" class="w-full h-full object-cover rounded-xl scale-120">
+                      </div>
+                     <div class="absolute -bottom-4 -right-4 bg-accent text-white px-4 py-2 rounded-lg shadow-lg">
+                    <p>Open to Work</p>
+                    
+                     </div>
+                     
+                            
+                        </div>
+                    </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Info Section -->
+    <section class="py-8 bg-light dark:bg-light dark:text-gray-900">
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-wrap justify-center gap-6 md:gap-10">
+                <div class="flex items-center">
+                    <i class="fas fa-envelope text-accent text-xl mr-3"></i>
+                    <span>mohamedali.sadiki1@gmail.com</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-phone text-accent text-xl mr-3"></i>
+                    <span>+212 708-179-799</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-map-marker-alt text-accent text-xl mr-3"></i>
+                    <span>Boulevard Mohamed V NR 27 Tarmast, Goulmima, Er-Rachidia</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-id-card text-accent text-xl mr-3"></i>
+                    <span>Driving License: B</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold mb-12 text-center section-title">Professional Experience</h2>
+            
+            <div class="space-y-10">
+        <!-- Experience Item 1 -->
+      <div x-data="{ open: false }" class="experience-card bg-white p-6 rounded-lg shadow-md cursor-pointer" @click="open = !open">
+  <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
+    <div>
+      <h3 class="text-xl font-bold text-primary">Project Control Engineer</h3>
+      <p class="text-lg font-semibold">ARCHIRODON - New Phosphate Port, Laâyoune</p>
+    </div>
+    <span class="mt-2 md:mt-0 bg-accent text-white px-3 py-1 rounded-full text-sm">01 October 2024 – Present</span>
+  </div>
+
+  <ul class="list-disc pl-5 space-y-2 mt-4">
+    <li>Report and dashboard generation for progress tracking</li>
+    <li>Contractual documentation preparation</li>
+    <li>Technical and administrative supervision of three primary components of the maritime project (Trestle, Main and Secondary Dike with a floating dock, seawater intake)</li>
+    <li>Support contract management, claims, amendments</li>
+    <li>Productivity monitoring tools</li>
+    <li>Analysis of weather and marine constraints for work planning</li>
+    <li>Big Data analysis and visualization for decision support</li>
+  </ul>
+
+  <!-- Toggle Content -->
+  <div x-show="open" x-transition>
+    <div class="bg-gray-50 p-6 mt-6 rounded-lg shadow-inner">
+      <h3 class="text-xl font-semibold text-primary mb-2">New Phosphate Port Construction Project Overview ($500M EPC)</h3>
+
+      <p class="mb-4">The New Phosphate Port is a major infrastructure project composed of the following components:</p>
+
+      <h4 class="font-semibold mt-4 mb-2 underline">1. Breakwater Structure</h4>
+      <ul class="list-disc pl-5 space-y-1 mb-2">
+        <li>Caisson breakwater, ~950 meters long</li>
+        <li>Dual-purpose: quay for 2 vessels (solid & liquid bulk handling)</li>
+      </ul>
+
+      <h4 class="font-semibold mt-4 mb-2 underline">2. Access Infrastructure</h4>
+      <ul class="list-disc pl-5 space-y-1 mb-2">
+        <li>Trestle bridge: ~3,170 meters long</li>
+        <li>Onshore ground access ramp</li>
+        <li>Floating service quay with two access footbridges</li>
+      </ul>
+
+      <h4 class="font-semibold mt-4 mb-2 underline">3. Marine Works</h4>
+      <ul class="list-disc pl-5 space-y-1 mb-2">
+        <li>Dredging, desilting, and rock excavation for:
+          <ul class="list-disc pl-5 mt-1">
+            <li>Access channel</li>
+            <li>Turning basin</li>
+          </ul>
+        </li>
+        <li>Mooring/berthing equipment: bollards, fenders, ladders</li>
+        <li>Navigation aids supply & installation</li>
+      </ul>
+
+      <h4 class="font-semibold mt-4 mb-2 underline">4. Seawater Intake System</h4>
+      <ul class="list-disc pl-5 space-y-1 mb-2">
+        <li>Two submerged intake pipes</li>
+        <li>Intake header at approx. -10m CD</li>
+        <li>Booster Well (Pumping Station) near shoreline</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Right-Aligned Toggle Button -->
+  <div class="mt-4 flex justify-end">
+    <button @click.stop="open = !open" class="text-accent font-medium hover:underline focus:outline-none">
+      <span x-text="open ? 'View Less ▲' : 'View More ▼'"></span>
+    </button>
+  </div>
+</div>
+
+        <!-- Experience Item 2 -->
+                                
+<div x-data="{ open: false }" class="experience-card bg-white p-6 rounded-lg shadow-md cursor-pointer" @click="open = !open">
+  <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
+    <div>
+      <h3 class="text-xl font-bold text-primary">Quality Engineer</h3>
+      <p class="text-lg font-semibold">STFA-SGTM GROUP – Port Nador West Med</p>
+    </div>
+    <span class="mt-2 md:mt-0 bg-accent text-white px-3 py-1 rounded-full text-sm">01 June – 20 August 2024</span>
+  </div>
+
+  <ul class="list-disc pl-5 space-y-2 mt-4">
+    <li>Comparative analysis of caisson stability (rectangular vs quadrilobed)</li>
+    <li>Monitoring of superstructure works for caisson dike</li>
+    <li>Preparation of as-built documentation</li>
+    <li>Python automation for repetitive documentation tasks</li>
+  </ul>
+
+  <!-- Toggle Content -->
+  <div x-show="open" x-transition>
+    <div class="bg-gray-50 p-6 mt-6 rounded-lg shadow-inner">
+      <h3 class="text-xl font-semibold text-primary mb-2">Nador West Med Port Project Overview ($800M )</h3>
+
+      <p class="mb-4">The Nador West Med Port is a major infrastructure project composed of the following components:</p>
+
+      <h3 class="font-semibold mt-4 mb-2 underline">1. Protection Structures</h3>
+      <ul class="list-disc pl-5 space-y-1 mb-4">
+        <li>Main breakwater (rubble mound & 130 Caissons): 4,200 m </li>
+        <li>Secondary rubble mound breakwater: 1,200 m</li>
+        <li>Overall protection: ~5.4 km, reaching -35 m ZH</li>
+        <li>Enclosed water area: 250 hectares (turning circle at -22 m ZH)</li>
+      </ul>
+
+      <h3 class="font-semibold mt-4 mb-2 underline">2. Berthing Structures</h3>
+      <ul class="list-disc pl-5 space-y-1 mb-4">
+        <li>East & West container terminals on piles: 2,960 m total (at -20 m ZH)</li>
+        <li>500 m wide dock basin between terminals</li>
+        <li>East yard: 76 ha | West yard: 62 ha</li>
+        <li>3 oil berths (along breakwater): 118 m each</li>
+        <li>1 specialized bulk berth (on piles at -20 m ZH)</li>
+        <li>1 service quay: 360 m (depth: -7 m ZH)</li>
+      </ul>
+
+      <h3 class="font-semibold mt-4 mb-2 underline">3. Nautical Access</h3>
+      <p class="mb-4">Access via 1,400 m long navigation channel at -22 m ZH (SSW–NNE orientation).</p>
+
+      <h3 class="font-semibold mt-4 mb-2 underline">4. Quay Equipment</h3>
+      <ul class="list-disc pl-5 space-y-1">
+        <li>Mooring bollards & quick-release hooks</li>
+        <li>Fenders, ladders, tie-downs for gantry cranes</li>
+        <li>Gantry cranes, loading arms, and additional lifting equipment</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Right-Aligned Toggle Button -->
+  <div class="mt-4 flex justify-end">
+    <button @click.stop="open = !open" class="text-accent font-medium hover:underline focus:outline-none">
+      <span x-text="open ? 'View Less ▲' : 'View More ▼'"></span>
+    </button>
+  </div>
+</div>
+
+<!-- Another Experience Card (Static) -->
+<div class="experience-card bg-white p-6 rounded-lg shadow-md mt-8">
+    <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
+        <div>
+            <h3 class="text-xl font-bold text-primary">Final Study Project - Internship</h3>
+            <p class="text-lg font-semibold">STFA-SGTM GROUP - Port Nador West Med</p>
+        </div>
+        <span class="mt-2 md:mt-0 bg-accent text-white px-3 py-1 rounded-full text-sm">01 February – 01 July 2024</span>
+    </div>
+    <ul class="list-disc pl-5 space-y-2">
+        <li>Comparative analysis of the stability of the caissons for the main caisson dike of the NWM port: Examination of rectangular and quadrilobed models</li>
+        <li>Monitoring superstructure works of caisson dike</li>
+        <li>As-Built documentation and Python automation for repetitive tasks</li>
+    </ul>
+</div>
+
+                <!-- Experience Item 3 -->
+                <div class="experience-card bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
+                        <div>
+                            <h3 class="text-xl font-bold text-primary">Summer Internship</h3>
+                            <p class="text-lg font-semibold">STFA-SGTM GROUP - Port Nador West Med</p>
+                        </div>
+                        <span class="mt-2 md:mt-0 bg-accent text-white px-3 py-1 rounded-full text-sm">20 August – 20 September 2023</span>
+                    </div>
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li>Marine works execution procedures at Nador West Med port</li>
+                        <li>Caisson elevation (reinforcement, concrete placement)</li>
+                        <li>Treatment of concrete anomalies</li>
+                    </ul>
+                </div>
+                
+                <!-- Additional experience items would follow the same pattern -->
+                <div x-data="{ open: false }" class="experience-card bg-white p-6 rounded-lg shadow-md cursor-pointer" @click="open = !open">
+  <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
+    <div>
+      <h3 class="text-xl font-bold text-primary">End of Year Project – Internship</h3>
+      <p class="text-lg font-semibold">SOCIÉTÉ BTP CONSULTING </p>
+    </div>
+    <span class="mt-2 md:mt-0 bg-accent text-white px-3 py-1 rounded-full text-sm">Feb 2023 – Jun 2023</span>
+  </div>
+
+  <ul class="list-disc pl-5 space-y-2 mt-4">
+    <li>Conducted a roadway connection construction study including site-specific considerations</li>
+        <li>Performed comprehensive hydrological and hydraulic analysis to support design decisions</li>
+        <li>Designed and optimized roadway structure in accordance with local standards</li>
+        <li>Developed culvert structural design using Robot Structural Analysis software</li>
+  </ul>
+
+  <!-- Toggle Content -->
+  <div x-show="open" x-transition>
+    <div class="bg-gray-50 p-6 mt-6 rounded-lg shadow-inner">
+      <h3 class="text-xl font-semibold text-primary mb-2">Rural Road Link Design & Construction Study – EL HOUZ Province</h3>
+
+      <p class="mb-4">This project aimed to improve access and reduce isolation for remote communities in the Marrakech-Tensift-Al Haouz region through the development of a rural road link connecting Douar Taourirt to Douar Ouareti.</p>
+
+      <h4 class="font-semibold mt-4 mb-2 underline">Key Challenges</h4>
+      <ul class="list-disc pl-5 space-y-1 mb-2">
+        <li>Steep mountainous topography requiring careful alignment studies</li>
+        <li>Harsh climate with rainfall, wind, and landslide risks impacting construction</li>
+        <li>Limited access to site for materials and equipment transport</li>
+        <li>Safety considerations due to unstable and rugged terrain</li>
+      </ul>
+
+      <h4 class="font-semibold mt-4 mb-2 underline">Objectives</h4>
+      <ul class="list-disc pl-5 space-y-1 mb-2">
+        <li>Facilitate access to remote residential zones</li>
+        <li>Improve connectivity and economic potential for isolated communities</li>
+        <li>Support development of secure and viable new settlement areas</li>
+      </ul>
+
+      <h4 class="font-semibold mt-4 mb-2 underline">Design Process</h4>
+      <ul class="list-disc pl-5 space-y-1 mb-2">
+        <li>Collection of geological, topographic, and environmental data</li>
+        <li>Comparison of potential routes under technical and environmental constraints</li>
+        <li>Definition of alignment, slopes, and road geometry</li>
+        <li>Material specification and cost estimation</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Right-Aligned Toggle Button -->
+  <div class="mt-4 flex justify-end">
+    <button @click.stop="open = !open" class="text-accent font-medium hover:underline focus:outline-none">
+      <span x-text="open ? 'View Less ▲' : 'View More ▼'"></span>
+    </button>
+  </div>
+</div>
+
+            </div>
+        </div>
+    </section>
+
+<!-- Skills Section -->
+<section id="skills" class="py-16 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-3xl font-bold mb-12 text-center section-title">Technical Skills</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+      <!-- Engineering Software -->
+      <div class="bg-white p-6 rounded-lg shadow-md">
+        <h3 class="text-xl font-bold text-primary mb-6 flex items-center">
+          <i class="fas fa-laptop-code mr-3"></i>
+          Engineering Software
+        </h3>
+        <div class="flex flex-wrap gap-3">
+          <span class="skill-badge bg-secondary text-white px-4 py-2 rounded-full">Autocad</span>
+          <span class="skill-badge bg-secondary text-white px-4 py-2 rounded-full">Robot Structural Analysis</span>
+          <span class="skill-badge bg-secondary text-white px-4 py-2 rounded-full">Revit</span>
+          <span class="skill-badge bg-secondary text-white px-4 py-2 rounded-full">Covadis</span>
+          <span class="skill-badge bg-secondary text-white px-4 py-2 rounded-full">Piste</span>
+          <span class="skill-badge bg-secondary text-white px-4 py-2 rounded-full">ALIZE-LCPC</span>
+          <span class="skill-badge bg-secondary text-white px-4 py-2 rounded-full">Plaxis</span>
+          <span class="skill-badge bg-secondary text-white px-4 py-2 rounded-full">RDM 6</span>
+        </div>
+      </div>
+
+      <!-- Office & Data Analysis -->
+      <div class="bg-white p-6 rounded-lg shadow-md">
+        <h3 class="text-xl font-bold text-primary mb-6 flex items-center">
+          <i class="fas fa-chart-line mr-3"></i>
+          Office & Data Analysis
+        </h3>
+        <div class="flex flex-wrap gap-3">
+          <span class="skill-badge bg-secondary text-white px-4 py-2 rounded-full">Excel</span>
+          <span class="skill-badge bg-secondary text-white px-4 py-2 rounded-full">Power BI</span>
+          <span class="skill-badge bg-secondary text-white px-4 py-2 rounded-full">Power Query</span>
+          <span class="skill-badge bg-secondary text-white px-4 py-2 rounded-full">Word</span>
+          <span class="skill-badge bg-secondary text-white px-4 py-2 rounded-full">PowerPoint</span>
+        </div>
+      </div>
+
+      <!-- Languages -->
+      <div class="bg-white p-6 rounded-lg shadow-md">
+        <h3 class="text-xl font-bold text-primary mb-6 flex items-center">
+          <i class="fas fa-language mr-3"></i>
+          Languages
+        </h3>
+        <div class="space-y-4">
+          <div>
+            <div class="flex justify-between mb-6">
+              <span>Arabic</span>
+              <span>Native</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-2.5">
+              <div class="bg-secondary h-2.5 rounded-full" style="width: 100%"></div>
+            </div>
+            <div class="flex justify-between mt-6 mb-2">
+              <span>French</span>
+              <span>B2</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-2.5">
+              <div class="bg-secondary h-2.5 rounded-full" style="width: 80%"></div>
+            </div>
+          </div>
+          <div>
+            <div class="flex justify-between mb-1">
+              <span>English</span>
+              <span>C1</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-2.5">
+              <div class="bg-secondary h-2.5 rounded-full" style="width: 85%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Professional Skills -->
+      <div class="bg-white p-6 rounded-lg shadow-md">
+        <h3 class="text-xl font-bold text-primary mb-6 flex items-center">
+          <i class="fas fa-users mr-3"></i>
+          Professional Skills
+        </h3>
+        <div class="flex flex-wrap gap-3">
+          <span class="skill-badge bg-secondary text-white px-4 py-2 rounded-full">Project Management</span>
+          <span class="skill-badge bg-secondary text-white px-4 py-2 rounded-full">Structural Analysis</span>
+          <span class="skill-badge bg-secondary text-white px-4 py-2 rounded-full">Infrastructure Design</span>
+          <span class="skill-badge bg-secondary text-white px-4 py-2 rounded-full">Construction Supervision</span>
+          <span class="skill-badge bg-secondary text-white px-4 py-2 rounded-full">Technical Documentation</span>
+          <span class="skill-badge bg-secondary text-white px-4 py-2 rounded-full">Data Analysis</span>
+        </div>
+      </div>
+
+      <!-- Technical Expertise -->
+      <div class="bg-white p-6 rounded-lg shadow-md">
+        <h3 class="text-xl font-bold text-primary mb-6 flex items-center">
+          <i class="fas fa-tools mr-3"></i>
+          Technical Expertise
+        </h3>
+        <div class="flex flex-wrap gap-3">
+          <span class="skill-badge bg-secondary text-white px-4 py-2 rounded-full">Construction Monitoring & Quality Control</span>
+          <span class="skill-badge bg-secondary text-white px-4 py-2 rounded-full">Data Visualization & Reporting</span>
+          <span class="skill-badge bg-secondary text-white px-4 py-2 rounded-full">Project Control & Scheduling</span>
+          <span class="skill-badge bg-secondary text-white px-4 py-2 rounded-full">Marine Infrastructure Development</span>
+          <span class="skill-badge bg-secondary text-white px-4 py-2 rounded-full">Road Construction</span>
+          <span class="skill-badge bg-secondary text-white px-4 py-2 rounded-full">Building Information Modeling (BIM)</span>
+          <span class="skill-badge bg-secondary text-white px-4 py-2 rounded-full">Structural Design & Analysis</span>
+          <span class="skill-badge bg-secondary text-white px-4 py-2 rounded-full">Hydraulic & Hydrological Studies</span>
+        </div>
+      </div>
+
+      <!-- Professional Attributes -->
+      <div class="bg-white p-6 rounded-lg shadow-md">
+        <h3 class="text-xl font-bold text-primary mb-6 flex items-center">
+          <i class="fas fa-star mr-3"></i>
+          Professional Attributes
+        </h3>
+        <ul class="list-disc list-inside space-y-3 text-gray-700">
+          <li><strong>Problem-Solving:</strong> Strong analytical skills with focus on innovative engineering solutions</li>
+          <li><strong>Leadership:</strong> Proven ability to supervise technical teams and coordinate multi-disciplinary projects</li>
+          <li><strong>Adaptability:</strong> Experience working in diverse environments from road construction to marine infrastructure</li>
+          <li><strong>Communication:</strong> Multilingual professional with excellent technical writing and presentation skills</li>
+          <li><strong>Continuous Learning:</strong> Committed to staying current with industry standards and emerging technologies</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+    <!-- Education Section -->
+    <section id="education" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold mb-12 text-center section-title">Education</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Education Item 1 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-primary">
+                    <h3 class="text-xl font-bold text-primary">State Engineer in Civil Engineering</h3>
+                    <p class="text-lg font-semibold mb-2">National School of Applied Sciences of Agadir</p>
+                    <p class="text-accent mb-4">2019–2024</p>
+                    <ul class="list-disc pl-5 space-y-1">
+                        <li>2 years preparatory cycle (2019–2021)</li>
+                        <li>3 years engineering program (2021–2024)</li>
+                    </ul>
+                </div>
+                
+                <!-- Education Item 2 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-primary">
+                    <h3 class="text-xl font-bold text-primary">Baccalauréat</h3>
+                    <p class="text-lg font-semibold mb-2">Lycée Mohamed 5 GOULMIMA</p>
+                    <p class="text-accent mb-4">2019</p>
+                    <p>Specialty:  physical science</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-gradient-to-br from-primary to-dark text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold mb-12 text-center section-title">Get In Touch</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <!-- Contact Info -->
+                <div>
+                    <h3 class="text-xl font-bold mb-6">Contact Information</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <i class="fas fa-envelope mt-1 mr-4 text-accent"></i>
+                            <div>
+                                <p class="font-semibold">Email</p>
+                                <p>mohamedali.sadiki1@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-phone mt-1 mr-4 text-accent"></i>
+                            <div>
+                                <p class="font-semibold">Phone</p>
+                                <p>+212 708-179-799</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-4 text-accent"></i>
+                            <div>
+                                <p class="font-semibold">Address</p>
+                                <p>Boulevard Mohamed V NR 27 Tarmast, Goulmima, Er-Rachidia</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-10">
+                        <h3 class="text-xl font-bold mb-6">Professional Profiles</h3>
+                        <div class="flex space-x-4">
+                            <a href="https://www.linkedin.com/in/mohamed-ali-sadiki" class="bg-white text-primary w-12 h-12 rounded-full flex items-center justify-center hover:bg-gray-200 transition duration-300">
+                                <i class="fab fa-linkedin-in text-xl"></i>
+                            </a>
+                            <a href="mailto:mohamedali.sadiki1@gmail.com" class="bg-white text-primary w-12 h-12 rounded-full flex items-center justify-center hover:bg-gray-200 transition duration-300">
+                        <i class="fas fa-envelope"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Contact Form -->
+               <div>
+  <form action="https://formsubmit.co/mohamedali.sadiki1@gmail.com" method="POST" class="space-y-6">
+    
+    <!-- Hidden Settings -->
+    <input type="hidden" name="_next" value="https://medalisadki.github.io/Portfolio/">
+    <input type="hidden" name="_captcha" value="false">
+
+    <div>
+      <label for="name" class="block mb-2">Full Name</label>
+      <input type="text" name="name" id="name" required
+        class="w-full px-4 py-3 rounded-lg bg-white bg-opacity-10 border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-accent">
+    </div>
+
+    <div>
+      <label for="email" class="block mb-2">Email Address</label>
+      <input type="email" name="email" id="email" required
+        class="w-full px-4 py-3 rounded-lg bg-white bg-opacity-10 border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-accent">
+    </div>
+
+    <div>
+      <label for="subject" class="block mb-2">Subject</label>
+      <input type="text" name="subject" id="subject" required
+        class="w-full px-4 py-3 rounded-lg bg-white bg-opacity-10 border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-accent">
+    </div>
+
+    <div>
+      <label for="message" class="block mb-2">Message</label>
+      <textarea name="message" id="message" rows="5" required
+        class="w-full px-4 py-3 rounded-lg bg-white bg-opacity-10 border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-accent"></textarea>
+    </div>
+
+    <button type="submit"
+      class="bg-accent hover:bg-blue-400 text-white px-6 py-3 rounded-lg font-medium w-full transition duration-300">
+      Send Message
+    </button>
+  </form>
+</div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 bg-dark text-gray-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p>&copy; 2025 Mohamed-Ali Sadiki. All rights reserved.</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="hover:text-accent transition duration-300">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    
+                    <a href="mailto:mohamedali.sadiki1@gmail.com" class="hover:text-accent transition duration-300">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    // Mobile menu toggle
+    document.getElementById('mobile-menu-button').addEventListener('click', function () {
+        const menu = document.getElementById('mobile-menu');
+        menu.classList.toggle('hidden');
+    });
+
+    // Close mobile menu when clicking a link
+    document.querySelectorAll('#mobile-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.add('hidden');
+        });
+    });
+
+    // OPTIONAL: You can still use this to show an alert *after* Formspree redirect
+    // But do NOT block the form submission
+    // document.querySelector('form').addEventListener('submit', function(e) {
+    //     alert('Thank you for your message! I will get back to you soon.');
+    // });
+    </script>
+    <script>
+        // Dark mode functionality
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const mobileDarkModeToggle = document.getElementById('mobileDarkModeToggle');
+        
+        // Check for saved user preference
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            document.documentElement.classList.add('dark');
+            darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            if (mobileDarkModeToggle) {
+                mobileDarkModeToggle.innerHTML = '<i class="fas fa-sun mr-2"></i>Light Mode';
+            }
+        }
+
+        // Toggle dark mode
+        function toggleDarkMode() {
+            document.documentElement.classList.toggle('dark');
+            const isDark = document.documentElement.classList.contains('dark');
+            
+            if (isDark) {
+                darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                if (mobileDarkModeToggle) {
+                    mobileDarkModeToggle.innerHTML = '<i class="fas fa-sun mr-2"></i>Light Mode';
+                }
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                if (mobileDarkModeToggle) {
+                    mobileDarkModeToggle.innerHTML = '<i class="fas fa-moon mr-2"></i>Dark Mode';
+                }
+                localStorage.setItem('darkMode', 'disabled');
+            }
+        }
+
+        // Event listeners
+        darkModeToggle.addEventListener('click', toggleDarkMode);
+        if (mobileDarkModeToggle) {
+            mobileDarkModeToggle.addEventListener('click', toggleDarkMode);
+        }
+    </script>
+</body>
+</html>
